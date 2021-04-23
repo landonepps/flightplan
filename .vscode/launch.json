@@ -1,0 +1,44 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Search",
+            "program": "${workspaceFolder}/bin/cli-search.js",
+            "request": "launch",
+            "args": [
+                "-w",
+                "NH",
+                "-f",
+                "NYC",
+                "-t",
+                "TYO",
+                "-c",
+                "business",
+                "-s",
+                "2022-03-31",
+                "-e",
+                "2022-03-31"
+            ],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
+            "name": "Launch Server",
+            "program": "${workspaceFolder}/bin/cli-server.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "pwa-chrome",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}

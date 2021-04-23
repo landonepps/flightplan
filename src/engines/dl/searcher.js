@@ -7,8 +7,8 @@ module.exports = class extends Searcher {
     // Sometimes the page keeps reloading out from under us
     return this.retry(async () => {
       try {
-        await page.waitFor(1000);
-        await page.waitFor(".logged-in-container", { timeout: 5000 });
+        await page.waitForTimeout(1000);
+        await page.waitForSelector(".logged-in-container", { timeout: 5000 });
       } catch (err) {}
       return !!(await page.$(".logged-in-container"));
     });
@@ -23,16 +23,16 @@ module.exports = class extends Searcher {
     page.goto("https://www.delta.com/login/loginPage?staticurl=");
 
     // Enter username and password
-    await page.waitFor(".loginContentBody", { timeout: 5000 });
-    await page.waitFor(2500);
+    await page.waitForSelector(".loginContentBody", { timeout: 5000 });
+    await page.waitForTimeout(2500);
     await this.enterText("#userId", username);
     await this.enterText("#password", password);
-    await page.waitFor(2500);
+    await page.waitForTimeout(2500);
 
     // Check remember box, and submit the form
     // if (!(await page.$("#rememberMe:checked"))) {
     //   await page.click("#persistentLogin_CheckBox");
-    //   await page.waitFor(250);
+    //   await page.waitForTimeout(250);
     // }
     await this.clickAndWait(".loginButton");
   }
@@ -86,7 +86,7 @@ module.exports = class extends Searcher {
     //   $("form")[0].submit();
     // });
     // console.log("DT form evaluate is done ");
-    // await page.waitFor(3000);
+    // await page.waitForTimeout(3000);
 
     // // Wait for results to load
     this.info("Submitting search form");
@@ -158,7 +158,7 @@ module.exports = class extends Searcher {
     // then go here
     // submit button
     page.goto("https://www.delta.com/flight-search-2/book-a-flight");
-    await page.waitFor(3000);
+    await page.waitForTimeout(3000);
 
     // Uncheck flexible dates since we want to see specific dates
     console.log("Unchecking things");
@@ -167,7 +167,7 @@ module.exports = class extends Searcher {
       $("#chkFlexDate").attr("disabled", false);
       $("#chkFlexDate").click();
     });
-    await page.waitFor(3000);
+    await page.waitForTimeout(3000);
 
     await page.click("#btnSubmit");
     await this.settle();
@@ -182,10 +182,10 @@ module.exports = class extends Searcher {
     while (true) {
       try {
         await Promise.race([
-          page.waitFor(".flightcardtable", {
+          page.waitForSelector(".flightcardtable", {
             timeout: 120000
           }),
-          page.waitFor(".errorTextSummary", {
+          page.waitForSelector(".errorTextSummary", {
             timeout: 120000
           })
         ]);

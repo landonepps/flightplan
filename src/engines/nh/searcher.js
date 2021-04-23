@@ -5,8 +5,8 @@ const { errors } = Searcher
 module.exports = class extends Searcher {
   async isLoggedIn (page) {
     await Promise.race([
-      page.waitFor('li.btnLogoutArea', { visible: true }).catch(e => {}),
-      page.waitFor('#accountNumber', { visible: true }).catch(e => {})
+      page.waitForSelector('li.btnLogoutArea', { visible: true }).catch(e => {}),
+      page.waitForSelector('#accountNumber', { visible: true }).catch(e => {})
     ])
 
     const loggedIn = !!(await page.$('li.btnLogoutArea'))
@@ -35,7 +35,7 @@ module.exports = class extends Searcher {
 
     // Check remember box, and submit the form
     await page.click('#rememberLogin')
-    await page.waitFor(250)
+    await page.waitForTimeout(250)
     await Promise.all([
       page.waitForNavigation({ waitUntil: 'networkidle0' }),
       page.click('#amcMemberLogin')
@@ -55,11 +55,11 @@ module.exports = class extends Searcher {
     const returnDate = oneWay ? departDate : query.returnDateMoment()
 
     // Wait a little bit for the form to load
-    await page.waitFor(1000)
+    await page.waitForTimeout(1000)
 
     // Choose multiple cities / mixed classes
     await this.clickAndWait('li.lastChild.deselection')
-    await page.waitFor(1000)
+    await page.waitForTimeout(1000)
 
     await this.fillForm({
       'requestedSegment:0:departureAirportCode:field': fromCity,
@@ -83,7 +83,7 @@ module.exports = class extends Searcher {
     if (await page.$('#travelArranger:checked')) {
       await page.click('#travelArranger')
     }
-    await page.waitFor(500)
+    await page.waitForTimeout(500)
 
     // Submit the form
     const response = await this.clickAndWait('input[value="Search"]')
@@ -135,7 +135,7 @@ module.exports = class extends Searcher {
 
     // Wait for spinner
     await this.monitor('div.loadingArea')
-    await this.page.waitFor(1000)
+    await this.page.waitForTimeout(1000)
   }
 
   async airportName (code) {

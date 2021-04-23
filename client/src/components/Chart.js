@@ -127,7 +127,7 @@ class Chart extends Component {
     this.tip = d3Tip()
       .attr('class', 'tooltip')
       .direction('sw')
-      .html((d) => this.renderToolTip(d.data))
+      .html((e, d) => this.renderToolTip(d.data))
 
     this.chartRing = d3.select(this._ref).append('svg')
       .attr('width', '100%')
@@ -167,27 +167,27 @@ class Chart extends Component {
           return 'segment segment-' + i
         })
         .attr('fill', (d) => d.data.fillColor)
-        .on('mouseover.highlight', (d) => {
+        .on('mouseover.highlight', (e, d) => {
           if (d.data.date) {
             var monthIndex = d.data.index
             var dayIndex = d.data.date.date() - 1
             this.focusEvent(monthIndex, dayIndex, true)
           }
         })
-        .on('mouseout.highlight', (d) => {
+        .on('mouseout.highlight', (e, d) => {
           if (d.data.date) {
             var monthIndex = d.data.index
             var dayIndex = d.data.date.date() - 1
             this.focusEvent(monthIndex, dayIndex, false)
           }
         })
-        .on('click', (d) => {
+        .on('click', (e, d) => {
           if (d.data.type === 'active') {
             this.setState({ showAwards: d.data })
           }
         })
       group.selectAll('.segment-label text')
-        .attr('fill', (d) => d.data.textColor)
+        .attr('fill', (e, d) => d.data.textColor)
       this.addMonthLabels(group, index)
       this.addDayLabels(group, month, arc, index)
     })

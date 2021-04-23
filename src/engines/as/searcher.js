@@ -39,7 +39,7 @@ module.exports = class extends Searcher {
 
     // Submit the form
     await page.click('#findFlights');
-    await page.waitFor(3000)
+    await page.waitForTimeout(3000)
 
     // Wait for results to load
     await this.settle()
@@ -56,10 +56,10 @@ module.exports = class extends Searcher {
     while (true) {
       try {
         await Promise.race([
-          page.waitFor('#MatrixResultColumn', {
+          page.waitForSelector('#MatrixResultColumn', {
             timeout: 120000
           }),
-          page.waitFor('.errorTextSummary', {
+          page.waitForSelector('.errorTextSummary', {
             timeout: 120000
           })
         ])

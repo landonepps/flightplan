@@ -7,8 +7,8 @@ const { errors } = Searcher
 module.exports = class extends Searcher {
   async isLoggedIn (page) {
     await Promise.race([
-      page.waitFor('#skypassLoginButton', { visible: true }).catch(e => {}),
-      page.waitFor('#skypassLogoutButton', { visible: true }).catch(e => {})
+      page.waitForSelector('#skypassLoginButton', { visible: true }).catch(e => {}),
+      page.waitForSelector('#skypassLogoutButton', { visible: true }).catch(e => {})
     ])
     return !!(await page.$('#skypassLogoutButton'))
   }
@@ -21,27 +21,27 @@ module.exports = class extends Searcher {
 
     // If login form not shown, click login link
     if (!await page.$('#usernameInput')) {
-      await page.waitFor('#skypassLoginButton', { visible: true })
+      await page.waitForSelector('#skypassLoginButton', { visible: true })
       await page.click('#skypassLoginButton')
-      await page.waitFor('#login-skypass', { visible: true })
+      await page.waitForSelector('#login-skypass', { visible: true })
     }
 
     // Login using SKYPASS #
     await page.click('#login-skypass')
-    await page.waitFor(500)
+    await page.waitForTimeout(500)
 
     // Enter username and password
-    await page.waitFor('#usernameInput', { visible: true })
+    await page.waitForSelector('#usernameInput', { visible: true })
     await this.enterText('#usernameInput', username)
     await this.enterText('#passwordInput', password)
 
     // Submit the form
     await page.click('#modalLoginButton')
     await Promise.race([
-      page.waitFor('#invalidLogin', { visible: true }).catch(e => {}),
-      page.waitFor('#login-skypass', { hidden: true }).catch(e => {})
+      page.waitForSelector('#invalidLogin', { visible: true }).catch(e => {}),
+      page.waitForSelector('#login-skypass', { hidden: true }).catch(e => {})
     ])
-    await page.waitFor(500)
+    await page.waitForTimeout(500)
 
     // Check for errors
     const msgError = await this.textContent('#invalidLogin')
@@ -67,7 +67,7 @@ module.exports = class extends Searcher {
 
     // Select "Award Booking"
     const awardSel = '#booking-type button[data-name="award"]'
-    await page.waitFor(awardSel)
+    await page.waitForSelector(awardSel)
     await page.click(awardSel)
 
     // Select "SkyTeam" or "Korean Air" award type based on whether we're searching partners
@@ -181,11 +181,11 @@ module.exports = class extends Searcher {
     await page.click(selector)
     await this.clear(selector)
     await page.keyboard.type(value, { delay: 10 })
-    await page.waitFor(1000)
+    await page.waitForTimeout(1000)
     await page.keyboard.press('ArrowDown')
-    await page.waitFor(500)
+    await page.waitForTimeout(500)
     await page.keyboard.press('Enter')
-    await page.waitFor(1000)
+    await page.waitForTimeout(1000)
   }
 
   async chooseDateTab (selector, oldDate, newDate) {
@@ -234,8 +234,8 @@ module.exports = class extends Searcher {
 
       try {
         await Promise.race([
-          page.waitFor(confirm1, { visible: true, timeout: 5000 }),
-          page.waitFor(confirm2, { visible: true, timeout: 5000 })
+          page.waitForSelector(confirm1, { visible: true, timeout: 5000 }),
+          page.waitForSelector(confirm2, { visible: true, timeout: 5000 })
         ])
       } catch (err) {
         break
@@ -254,10 +254,10 @@ module.exports = class extends Searcher {
         // Check the box to not show again, then dismiss the popup
         if (await page.$(dontShowAgainSel)) {
           await page.click(dontShowAgainSel)
-          await page.waitFor(500)
+          await page.waitForTimeout(500)
         }
         await page.click(confirmSel)
-        await page.waitFor(1000)
+        await page.waitForTimeout(1000)
       }
     } catch (err) {
       // Spurious context errors arise here sometimes, just try again...

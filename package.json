@@ -7,10 +7,10 @@
     "flightplan": "bin/cli.js"
   },
   "scripts": {
-    "postinstall": "cd client && yarn",
-    "client": "cd client && yarn start",
+    "postinstall": "cd client && npm install",
+    "client": "cd client && npm start",
     "server": "nodemon bin/cli-server.js",
-    "dev": "concurrently --kill-others-on-fail -p \"[{name}]\" -n \"CLIENT,SERVER\" -c \"black.bgBlue.bold,black.bgGreen.bold\" \"yarn client\" \"yarn server\"",
+    "dev": "concurrently --kill-others-on-fail -p \"[{name}]\" -n \"CLIENT,SERVER\" -c \"black.bgBlue.bold,black.bgGreen.bold\" \"npm client\" \"npm server\"",
     "test": "jest"
   },
   "repository": "https://github.com/flightplan-tool/flightplan",
@@ -18,31 +18,31 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "address": "^1.0.3",
+    "address": "^1.1.2",
     "await-sleep": "^0.0.1",
-    "better-sqlite3": "^4.1.4",
-    "chalk": "^2.4.1",
-    "cheerio": "^1.0.0-rc.2",
+    "better-sqlite3": "^7.1.5",
+    "chalk": "^4.1.1",
+    "cheerio": "^1.0.0-rc.6",
     "commander": "github:jd20/commander.js#master",
-    "csv-parse": "^2.5.0",
-    "express": "^4.16.3",
-    "external-ip": "^2.1.1",
-    "humanize-duration": "^3.15.3",
+    "csv-parse": "^4.15.4",
+    "express": "^4.17.1",
+    "external-ip": "^2.3.1",
+    "find-and": "latest",
+    "humanize-duration": "^3.25.2",
     "jspath": "^0.4.0",
-    "moment": "^2.9.0",
-    "moment-timezone": "^0.5.23",
-    "parse-duration": "^0.1.1",
-    "puppeteer": "^1.6.0-next.1532381444032",
-    "shelljs": "^0.8.2",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+    "parse-duration": "^1.0.0",
+    "puppeteer": "^9.0.0",
+    "shelljs": "^0.8.4",
     "sync-request": "6.1.0",
     "syncprompt": "^2.0.0",
-    "timetable-fns": "^0.1.16",
-    "find-and": "latest"
+    "timetable-fns": "^0.1.16"
   },
   "devDependencies": {
-    "concurrently": "^3.5.1",
-    "jest": "^23.6.0",
-    "jest-cli": "^23.6.0",
-    "nodemon": "^1.17.3"
+    "concurrently": "^6.0.2",
+    "jest": "26.6.0",
+    "jest-cli": "26.6.0",
+    "nodemon": "^2.0.7"
   }
 }

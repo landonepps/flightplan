@@ -11,8 +11,8 @@ module.exports = class extends Searcher {
     // Sometimes the page keeps reloading out from under us
     return this.retry(async () => {
       try {
-        await page.waitFor(1000)
-        await page.waitFor('#execLoginrForm, li.memberName', { timeout: 5000 })
+        await page.waitForTimeout(1000)
+        await page.waitForSelector('#execLoginrForm, li.memberName', { timeout: 5000 })
       } catch (err) {}
       return !!(await page.$('li.memberName'))
     })
@@ -27,12 +27,12 @@ module.exports = class extends Searcher {
     // Enter username and password
     await this.enterText('#membershipNumber', username)
     await this.enterText('#input_password', password)
-    await page.waitFor(250)
+    await page.waitForTimeout(250)
 
     // Check remember box, and submit the form
     if (!await page.$('#rememberMe:checked')) {
       await page.click('#showRememberModalIcon')
-      await page.waitFor(250)
+      await page.waitForTimeout(250)
     }
     await this.clickAndWait('#ecuserlogbutton')
 
@@ -57,7 +57,7 @@ module.exports = class extends Searcher {
     const returnDate = query.returnDateMoment()
 
     // Wait a few seconds for the form to auto-fill itself
-    await page.waitFor(3000)
+    await page.waitForTimeout(3000)
 
     // Get cabin values
     const cabinCode = {
@@ -104,11 +104,11 @@ module.exports = class extends Searcher {
     while (true) {
       try {
         await Promise.race([
-          page.waitFor('#flt_selection_form', { timeout: 120000 }),
-          page.waitFor('#noStopovers', { timeout: 120000 }),
-          page.waitFor('#captcha_form', { timeout: 120000 }),
-          page.waitFor('#blsErrors li', { timeout: 120000 }),
-          page.waitFor('div.outage-page', { timeout: 120000 })
+          page.waitForSelector('#flt_selection_form', { timeout: 120000 }),
+          page.waitForSelector('#noStopovers', { timeout: 120000 }),
+          page.waitForSelector('#captcha_form', { timeout: 120000 }),
+          page.waitForSelector('#blsErrors li', { timeout: 120000 }),
+          page.waitForSelector('div.outage-page', { timeout: 120000 })
         ])
       } catch (err) {
         throw new Searcher.Error(`Stuck waiting for results to appear`)
@@ -120,7 +120,7 @@ module.exports = class extends Searcher {
           var noStopovers = document.querySelector('#noStopovers')
           noStopovers.click();
         })
-        await page.waitFor(500)
+        await page.waitForTimeout(500)
         await this.clickAndWait('#continueTopPod')
         continue
       }

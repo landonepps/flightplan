@@ -758,7 +758,7 @@ Tests element visibility by checking the `display`, `visibility`, and `opacity` 
 - `max` <[number]> Optional upper bound of time to wait for, in milliseconds
 - returns: <[Promise]>
 
-Waits for a variable amount of time (unlike `page.waitFor()` which waits for an exact amount of time). If `max` is not given, the wait time will be exactly `min`.
+Waits for a variable amount of time (unlike `page.waitForTimeout()` which waits for an exact amount of time). If `max` is not given, the wait time will be exactly `min`.
 
 ### parser.success(*obj1* [, *obj2*, ..., *objN*])
 ### parser.info(*obj1* [, *obj2*, ..., *objN*])

@@ -16,7 +16,7 @@ const reLagDays = /[+-]\d+$/
 
 const cabinNames = {
   'economy class': cabins.economy,
-  'premium economy': cabins.premium,
+  'premium economy class': cabins.premium,
   'business class': cabins.business,
   'first class': cabins.first
 }

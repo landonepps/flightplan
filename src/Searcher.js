@@ -126,7 +126,7 @@ class Searcher {
   async clickIfVisible (selector, timeout = 250) {
     const { page } = this._engine
     try {
-      await page.waitFor(selector, { visible: true, timeout })
+      await page.waitForSelector(selector, { visible: true, timeout })
       await page.click(selector)
       return true
     } catch (err) {
@@ -150,7 +150,7 @@ class Searcher {
 
       // Click, wait, and type
       await page.click(selector)
-      await page.waitFor(1000)
+      await page.waitForTimeout(1000)
       await page.keyboard.type(value, { delay: 10 })
     }
   }
@@ -195,14 +195,14 @@ class Searcher {
     while (true) {
       // Wait for the element to appear
       try {
-        await page.waitFor(selector, { visible: true, timeout: timeout1 })
+        await page.waitForSelector(selector, { visible: true, timeout: timeout1 })
       } catch (err) {
         return
       }
 
       // Wait for the element to disappear
       try {
-        await page.waitFor(selector, { hidden: true, timeout: timeout2 })
+        await page.waitForSelector(selector, { hidden: true, timeout: timeout2 })
       } catch (err) {
         throw new SearcherError('Stuck waiting for element to settle')
       }
@@ -216,7 +216,7 @@ class Searcher {
       try {
         return await fn()
       } catch (err) {
-        await page.waitFor(delay)
+        await page.waitForTimeout(delay)
       }
     }
     throw new SearcherError('Too many attempts failed')
@@ -225,7 +225,7 @@ class Searcher {
   async select (selector, value, wait = 500) {
     const { page } = this._engine
     await page.select(selector, value)
-    await page.waitFor(wait)
+    await page.waitForTimeout(wait)
     return value === await page.$eval(selector, x => x.value)
   }
 
@@ -339,7 +339,7 @@ class Searcher {
 
   waitBetween (min, max) {
     const { page } = this._engine
-    return page.waitFor(max ? utils.randomInt(min, max) : min)
+    return page.waitForTimeout(max ? utils.randomInt(min, max) : min)
   }
 
   get id () {

@@ -83,23 +83,23 @@ class SearchForm extends Component {
             <label style={{ gridArea: 'startLabel' }}>Start Date</label>
             <DatePicker
               name='startDate'
-              selected={searchStore.startDate}
-              minDate={moment()}
-              maxDate={searchStore.endDate}
+              selected={searchStore.startDate.toDate()}
+              minDate={moment().toDate()}
+              maxDate={searchStore.endDate.toDate()}
               monthsShown={2}
               fixedHeight
-              onChange={(val) => searchStore.update({ startDate: val })}
+              onChange={(val) => searchStore.update({ startDate: moment(val) })}
               style={{ gridArea: 'startDate' }}
             />
             <label style={{ gridArea: 'endLabel' }}>End Date</label>
             <DatePicker
               name='endDate'
-              selected={searchStore.endDate}
-              minDate={searchStore.startDate}
-              maxDate={moment().add(1, 'y')}
+              selected={searchStore.endDate.toDate()}
+              minDate={searchStore.startDate.toDate()}
+              maxDate={moment().add(1, 'y').toDate()}
               monthsShown={2}
               fixedHeight
-              onChange={(val) => searchStore.update({ endDate: val })}
+              onChange={(val) => searchStore.update({ endDate: moment(val) })}
               style={{ gridArea: 'endDate' }}
             />
           </div>

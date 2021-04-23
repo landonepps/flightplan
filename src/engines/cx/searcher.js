@@ -10,7 +10,7 @@ module.exports = class extends Searcher {
     // Sometimes the page keeps reloading out from under us
     return this.retry(async () => {
       try {
-        await page.waitFor('li.member-login-section, li.member-section', { visible: true })
+        await page.waitForSelector('li.member-login-section, li.member-section', { visible: true })
       } catch (err) {}
       return !!(await page.$('li.member-section'))
     })
@@ -25,12 +25,12 @@ module.exports = class extends Searcher {
     // Enter username and password
     await this.enterText('#account-login #username', username)
     await this.enterText('#account-login #password', password)
-    await page.waitFor(250)
+    await page.waitForTimeout(250)
 
     // Check remember box
     if (!await page.$('#account-login #checkRememberMe:checked')) {
       await page.click('#account-login label[for=checkRememberMe]')
-      await page.waitFor(250)
+      await page.waitForTimeout(250)
     }
 
     // Submit form
@@ -62,7 +62,7 @@ module.exports = class extends Searcher {
 
     // Set one-way / roundtrip
     await page.click(oneWay ? '#tab-itinerary-type-oneway span' : '#tab-itinerary-type-return span')
-    await page.waitFor(500)
+    await page.waitForTimeout(500)
 
     // Set dates
     const dates = oneWay ? [departDate] : [departDate, returnDate]
@@ -70,7 +70,7 @@ module.exports = class extends Searcher {
     for (let i = 0; i < dates.length; i++) {
       // Check if calendar is visible
       try {
-        await page.waitFor('#ui-datepicker-div', { visible: true, timeout: 2000 })
+        await page.waitForSelector('#ui-datepicker-div', { visible: true, timeout: 2000 })
       } catch (err) {
         // Don't see calendar, open it up
         await page.click(`${selector} button:nth-of-type(${i + 1})`)
@@ -93,7 +93,7 @@ module.exports = class extends Searcher {
 
     // Set quantity
     await page.click('#btn-passengers')
-    await page.waitFor('#select-adult', { visible: true })
+    await page.waitForSelector('#select-adult', { visible: true })
     if (!await this.select('#select-adult', quantity.toString())) {
       throw new Searcher.Error(`Could not set # of adults to: ${quantity}`)
     }
@@ -101,7 +101,7 @@ module.exports = class extends Searcher {
     // Turn off flexible dates
     if (await page.$('#flexible-dates:checked')) {
       await page.click('label[for=flexible-dates]')
-      await page.waitFor(250)
+      await page.waitForTimeout(250)
     }
 
     // Get results
@@ -132,7 +132,7 @@ module.exports = class extends Searcher {
       // Submit search form
       const response = await Promise.race([
         this.clickAndWait('button.btn-facade-search'),
-        this.page.waitFor('span.label-error', { visible: true, timeout: 0 })
+        this.page.waitForSelector('span.label-error', { visible: true, timeout: 0 })
       ])
       if (response && response.constructor.name !== 'ElementHandle') {
         this.checkResponse(response)
@@ -221,9 +221,9 @@ module.exports = class extends Searcher {
     const memberSel = 'li.member-section'
     const logoutSel = `${memberSel} button.circle-link-arrow-btn`
     try {
-      await page.waitFor(memberSel, { visible: true, timeout: 1000 })
+      await page.waitForSelector(memberSel, { visible: true, timeout: 1000 })
       await page.hover(memberSel)
-      await page.waitFor(logoutSel, { visible: true, timeout: 1000 })
+      await page.waitForSelector(logoutSel, { visible: true, timeout: 1000 })
       await this.clickAndWait(logoutSel)
     } catch (err) {}
   }
@@ -263,7 +263,7 @@ module.exports = class extends Searcher {
     // Scroll back to first tab
     while (true) {
       try {
-        await page.waitFor('div.owl-prev', { visible: true, timeout: 1000 })
+        await page.waitForSelector('div.owl-prev', { visible: true, timeout: 1000 })
         await page.click('div.owl-prev')
       } catch (err) {
         break
@@ -273,7 +273,7 @@ module.exports = class extends Searcher {
     // Scroll forward to desired tab
     for (let i = 0; i < tabIndex - 2; i++) {
       try {
-        await page.waitFor('div.owl-next', { visible: true, timeout: 1000 })
+        await page.waitForSelector('div.owl-next', { visible: true, timeout: 1000 })
         await page.click('div.owl-next')
       } catch (err) {
         break
@@ -286,12 +286,12 @@ module.exports = class extends Searcher {
 
     // Warning modal present?
     try {
-      await page.waitFor('#change-ticket-type-modal', { visible: true, timeout: 1000 })
+      await page.waitForSelector('#change-ticket-type-modal', { visible: true, timeout: 1000 })
 
       // Check the "Don't show again" box and dismiss
       if (await page.$('#change-ticket-type-dont-show-again:not(:checked)')) {
         await page.click('label[for=change-ticket-type-dont-show-again]')
-        await page.waitFor(250)
+        await page.waitForTimeout(250)
       }
       await page.click('#change-ticket-type-modal button.btn-confirm')
     } catch (err) {}
@@ -307,22 +307,22 @@ module.exports = class extends Searcher {
     const { page } = this
     await page.click(inputSel)
     await this.clear(inputSel)
-    await page.waitFor(500)
+    await page.waitForTimeout(500)
     await page.keyboard.type(value, { delay: 100 })
     const itemSel = selectSel + ` li[data-airportcode=${value}]`
-    await page.waitFor(itemSel, { visible: true, timeout: 10000 })
+    await page.waitForSelector(itemSel, { visible: true, timeout: 10000 })
     await page.click(itemSel)
-    await page.waitFor(500)
+    await page.waitForTimeout(500)
   }
 
   async clearCity (inputSel) {
     const { page } = this
     try {
-      await page.waitFor(inputSel, { visible: true })
+      await page.waitForSelector(inputSel, { visible: true })
       await page.click(inputSel)
-      await page.waitFor(500)
+      await page.waitForTimeout(500)
       await page.keyboard.press('Backspace')
-      await page.waitFor(500)
+      await page.waitForTimeout(500)
     } catch (err) {}
   }
 
@@ -383,7 +383,7 @@ module.exports = class extends Searcher {
       if (elemDate.isValid() && elemDate.date() === date.date()) {
         // Found the date, click it!
         await elem.click()
-        await page.waitFor(500)
+        await page.waitForTimeout(500)
         return { month, success: true }
       }
     }
@@ -396,12 +396,12 @@ module.exports = class extends Searcher {
 
     // Check if the desired link is not present
     try {
-      await page.waitFor(1000)
-      await page.waitFor(selector, { visible: true, timeout: 5000 })
+      await page.waitForTimeout(1000)
+      await page.waitForSelector(selector, { visible: true, timeout: 5000 })
     } catch (err) {
       throw new Searcher.Error(`Failed to navigate calendar to date: ${date}`)
     }
     await page.click(selector)
-    await page.waitFor(500)
+    await page.waitForTimeout(500)
   }
 }

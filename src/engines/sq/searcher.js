@@ -16,7 +16,7 @@ module.exports = class extends Searcher {
 
     // Check if we're logged in
     try {
-      await page.waitFor(
+      await page.waitForSelector(
         '#kfLoginPopup #membership-1, a.login, li.logged-in', {visible: true, timeout: 10000})
     } catch (err) {}
     return !!(await page.$('li.logged-in'))
@@ -34,17 +34,17 @@ module.exports = class extends Searcher {
     // Check if the login form is visible
     let formVisible = true
     try {
-      await page.waitFor('#kfLoginPopup #membership-1', {visible: true, timeout: 1000})
+      await page.waitForSelector('#kfLoginPopup #membership-1', {visible: true, timeout: 1000})
     } catch (err) {
       formVisible = false
     }
 
     if (!formVisible) {
       // Click the login link
-      const login = await page.waitFor('a.login', {visible: true})
+      const login = await page.waitForSelector('a.login', {visible: true})
       await login.asElement().click()
-      await page.waitFor('#kfLoginPopup #membership-1', {visible: true})
-      await page.waitFor(1000)
+      await page.waitForSelector('#kfLoginPopup #membership-1', {visible: true})
+      await page.waitForTimeout(1000)
     }
 
     // Enter username and password
@@ -54,7 +54,7 @@ module.exports = class extends Searcher {
     // Check remember box, and submit the form
     if (!await page.$('#kfLoginPopup #checkbox-1:checked')) {
       await page.click('#kfLoginPopup #checkbox-1')
-      await page.waitFor(250)
+      await page.waitForTimeout(250)
     }
     await this.clickAndWait('#kfLoginPopup #submit-1')
     await this.settle()
@@ -69,9 +69,9 @@ module.exports = class extends Searcher {
     })
     if (bypassed) {
       this.info('Detected and bypassed invisible captcha')
-      await page.waitFor(3000)
+      await page.waitForTimeout(3000)
       await this.settle()
-      await page.waitFor(5000)
+      await page.waitForTimeout(5000)
     }
 
     // Check for errors
@@ -95,7 +95,7 @@ module.exports = class extends Searcher {
         return page.evaluate(() => !document.querySelector('#travel-radio-2').checked)
       },
       async () => {
-        await page.waitFor('#travel-radio-2', { visible: true })
+        await page.waitForSelector('#travel-radio-2', { visible: true })
         await page.click('#travel-radio-2')
         await this.settle()
       },
@@ -105,10 +105,10 @@ module.exports = class extends Searcher {
 
     // Check the Return or One-way radio button
     if (oneWay) {
-      await page.waitFor('#city1-radio-5', {visible: true})
+      await page.waitForSelector('#city1-radio-5', {visible: true})
       await page.click('#city1-radio-5')
     } else {
-      await page.waitFor('#city1-radio-4', {visible: true})
+      await page.waitForSelector('#city1-radio-4', {visible: true})
       await page.click('#city1-radio-4')
     }
     await this.settle()
@@ -179,7 +179,7 @@ module.exports = class extends Searcher {
     const { page } = this
 
     // Ensure page is loaded, since we're only waiting until 'domcontentloaded' event
-    await page.waitFor(1000)
+    await page.waitForTimeout(1000)
     await this.settle()
 
     // Dismiss modal pop-up's
@@ -189,7 +189,7 @@ module.exports = class extends Searcher {
         await this.clickIfVisible('div.insider-opt-in-disallow-button') ||
         await this.clickIfVisible('div.ins-survey-435-close')
       ) {
-        await page.waitFor(2000)
+        await page.waitForTimeout(2000)
         continue
       }
       break

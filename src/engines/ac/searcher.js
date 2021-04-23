@@ -5,7 +5,7 @@ const { errors } = Searcher
 
 module.exports = class extends Searcher {
   async isLoggedIn (page) {
-    await page.waitFor(
+    await page.waitForSelector(
       'button.header-login-btn, a.header-logout-btn', {visible: true, timeout: 30000})
     return !!(await page.$('a.header-logout-btn'))
   }
@@ -19,12 +19,12 @@ module.exports = class extends Searcher {
     // Enter username and password
     await this.enterText('#cust', username)
     await this.enterText('#pin', password)
-    await page.waitFor(250)
+    await page.waitForTimeout(250)
 
     // Check remember box, and submit the form
     if (!await page.$('div.checkbox input:checked')) {
       await page.click('div.checkbox input')
-      await page.waitFor(250)
+      await page.waitForTimeout(250)
     }
     await this.clickAndWait('button.btn-primary.form-login-submit')
 
@@ -45,7 +45,7 @@ module.exports = class extends Searcher {
     const returnDate = query.returnDateMoment()
 
     // Wait a few seconds for the form to auto-fill itself
-    await page.waitFor(3000)
+    await page.waitForTimeout(3000)
 
     // Get cabin values
     const cabinVals = [cabins.first, cabins.business].includes(cabin)
@@ -107,7 +107,7 @@ module.exports = class extends Searcher {
     await this.attemptWhile(
       async () => { return !json },
       async () => {
-        await page.waitFor(1000)
+        await page.waitForTimeout(1000)
         json = await page.evaluate(() => this.results ? this.results.results : null)
       },
       15,
