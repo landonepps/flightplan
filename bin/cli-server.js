@@ -64,9 +64,31 @@ app.get('/api/search', async (req, res, next) => {
 
     // Add cities
     const cities = [ fromCity.toUpperCase(), toCity.toUpperCase() ]
+
+    // City to airports mapping
+    const cityToAirports = {
+      'TYO': ['HND', 'NRT'],
+      'NYC': ['JFK', 'LGA', 'EWR']
+    }
+
     if (direction === 'oneway') {
-      query += 'fromCity = ? AND toCity = ?'
-      params.push(...cities)
+      if (cities[0] in cityToAirports) {
+        let airports = cityToAirports[cities[0]]
+        query += `(${Array(airports.length).fill('fromCity = ?').join(' OR ')})`
+        params.push(...airports)
+      } else {
+        query += 'fromCity = ?'
+        params.push(cities[0])
+      }
+
+      if (cities[1] in cityToAirports) {
+        let airports = cityToAirports[cities[1]]
+        query += ` AND (${Array(airports.length).fill('toCity = ?').join(' OR ')})`
+        params.push(...airports)
+      } else {
+        query += ' AND toCity = ?'
+        params.push(cities[1])
+      }
     } else if (direction === 'roundtrip') {
       query += '((fromCity = ? AND toCity = ?) OR (toCity = ? AND fromCity = ?))'
       params.push(...cities, ...cities)
