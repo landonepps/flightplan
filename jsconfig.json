@@ -1,0 +1,8 @@
+{
+  "include": ["src/**/*.js", "shared/**/*.js", "bin/**/*.js"],
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module": "CommonJS",
+    "target": "ESNext"
+  }
+}
