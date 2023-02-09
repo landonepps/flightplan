@@ -130,7 +130,8 @@ module.exports = class extends Searcher {
     // CAPTCHA indicates we're being blocked based on IP address
     const msg = await this.textContent('#reCaptchaDescription')
     if (msg.includes('prevent fraudulent manipulation')) {
-      throw new errors.BlockedAccess()
+      this.warn("Access blocked. Complete captcha manually to proceed...")
+      await this.page.waitForNavigation()
     }
 
     // Wait for spinner
