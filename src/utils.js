@@ -1,5 +1,4 @@
 const address = require('address')
-const externalIPLib = require('external-ip')
 const moment = require('moment-timezone')
 const path = require('path')
 const timetable = require('timetable-fns')
@@ -183,10 +182,9 @@ function localIP () {
   return address.ip()
 }
 
-function externalIP () {
-  return new Promise((resolve, reject) => {
-    externalIPLib()((err, ip) => (err ? reject(err) : resolve(ip)))
-  })
+function externalIP() {
+  // At some point we'll need to switch to ES modules, but today is not that day.
+  return import('public-ip').then(publicIp => publicIp.publicIpv4());
 }
 
 module.exports = {

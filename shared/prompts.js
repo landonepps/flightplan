@@ -1,4 +1,4 @@
-const prompt = require('syncprompt')
+const prompt = require('prompt-sync')()
 
 function askYesNo (question, defaultChoice = 'yes') {
   const valid = { 'yes': true, 'y': true, 'no': false, 'n': false }

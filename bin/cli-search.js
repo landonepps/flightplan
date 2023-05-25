@@ -1,6 +1,6 @@
 const program = require('commander')
 const fs = require('fs')
-const prompt = require('syncprompt')
+const prompt = require('prompt-sync')()
 const timetable = require('timetable-fns')
 
 const fp = require('../src')
