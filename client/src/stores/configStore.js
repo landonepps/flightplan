@@ -1,4 +1,4 @@
-import { observable, computed, action } from 'mobx'
+import { observable, computed, action, makeObservable, runInAction } from 'mobx'
 
 export default class ConfigStore {
   @observable config
@@ -6,6 +6,7 @@ export default class ConfigStore {
   @observable loading = true
 
   constructor () {
+    makeObservable(this);
     this.load()
   }
 
@@ -36,12 +37,17 @@ export default class ConfigStore {
       }
 
       // Set config
-      this.config = await response.json()
-      this.loading = false
+      const jsonData = await response.json();
+      runInAction(() => {
+        this.config = jsonData;
+        this.loading = false;
+      });
     } catch (err) {
-      this.loading = false
-      this.error = err
-      console.error(err)
+      runInAction(() => {
+        this.loading = false;
+        this.error = err;
+      });
+      console.error(err);
     }
   }
 }

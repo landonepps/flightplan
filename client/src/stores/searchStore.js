@@ -1,6 +1,5 @@
-import { observable, computed, action, autorun } from 'mobx'
+import { observable, computed, action, autorun, makeObservable } from 'mobx'
 import moment from 'moment'
-import URLSearchParams from 'url-search-params'
 
 import * as utils from '../lib/utilities'
 
@@ -30,6 +29,7 @@ export default class SearchStore {
   _results = observable.array([], {deep: false})
 
   constructor (configStore) {
+    makeObservable(this);
     this.configStore = configStore
 
     // Load saved settings from local storage
