@@ -187,6 +187,10 @@ function externalIP() {
   return import('public-ip').then(publicIp => publicIp.publicIpv4());
 }
 
+function waitForTimeout(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 module.exports = {
   airportTimezone,
   appendPath,
@@ -209,5 +213,6 @@ module.exports = {
   validTime,
   validURL,
   localIP,
-  externalIP
+  externalIP,
+  waitForTimeout
 }

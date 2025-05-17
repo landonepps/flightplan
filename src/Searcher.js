@@ -150,7 +150,7 @@ class Searcher {
 
       // Click, wait, and type
       await page.click(selector)
-      await page.waitForTimeout(1000)
+      await utils.waitForTimeout(1000)
       await page.keyboard.type(value, { delay: 10 })
     }
   }
@@ -216,7 +216,7 @@ class Searcher {
       try {
         return await fn()
       } catch (err) {
-        await page.waitForTimeout(delay)
+        await utils.waitForTimeout(delay)
       }
     }
     throw new SearcherError('Too many attempts failed')
@@ -225,7 +225,7 @@ class Searcher {
   async select (selector, value, wait = 500) {
     const { page } = this._engine
     await page.select(selector, value)
-    await page.waitForTimeout(wait)
+    await utils.waitForTimeout(wait)
     return value === await page.$eval(selector, x => x.value)
   }
 
@@ -339,7 +339,7 @@ class Searcher {
 
   waitBetween (min, max) {
     const { page } = this._engine
-    return page.waitForTimeout(max ? utils.randomInt(min, max) : min)
+    return utils.waitForTimeout(max ? utils.randomInt(min, max) : min)
   }
 
   get id () {

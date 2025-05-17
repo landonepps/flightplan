@@ -1,4 +1,5 @@
 const Searcher = require('../../Searcher')
+const utils = require('../../utils')
 
 const {
   errors
@@ -39,7 +40,7 @@ module.exports = class extends Searcher {
 
     // Submit the form
     await page.click('#findFlights');
-    await page.waitForTimeout(3000)
+    await utils.waitForTimeout(3000)
 
     // Wait for results to load
     await this.settle()

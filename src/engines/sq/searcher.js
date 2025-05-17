@@ -1,5 +1,6 @@
 const Searcher = require('../../Searcher')
 const { cabins } = require('../../consts')
+const utils = require('../../utils')
 
 const { errors } = Searcher
 
@@ -44,7 +45,7 @@ module.exports = class extends Searcher {
       const login = await page.waitForSelector('a.login', {visible: true})
       await login.asElement().click()
       await page.waitForSelector('#kfLoginPopup #membership-1', {visible: true})
-      await page.waitForTimeout(1000)
+      await utils.waitForTimeout(1000)
     }
 
     // Enter username and password
@@ -54,7 +55,7 @@ module.exports = class extends Searcher {
     // Check remember box, and submit the form
     if (!await page.$('#kfLoginPopup #checkbox-1:checked')) {
       await page.click('#kfLoginPopup #checkbox-1')
-      await page.waitForTimeout(250)
+      await utils.waitForTimeout(250)
     }
     await this.clickAndWait('#kfLoginPopup #submit-1')
     await this.settle()
@@ -69,9 +70,9 @@ module.exports = class extends Searcher {
     })
     if (bypassed) {
       this.info('Detected and bypassed invisible captcha')
-      await page.waitForTimeout(3000)
+      await utils.waitForTimeout(3000)
       await this.settle()
-      await page.waitForTimeout(5000)
+      await utils.waitForTimeout(5000)
     }
 
     // Check for errors
@@ -179,7 +180,7 @@ module.exports = class extends Searcher {
     const { page } = this
 
     // Ensure page is loaded, since we're only waiting until 'domcontentloaded' event
-    await page.waitForTimeout(1000)
+    await utils.waitForTimeout(1000)
     await this.settle()
 
     // Dismiss modal pop-up's
@@ -189,7 +190,7 @@ module.exports = class extends Searcher {
         await this.clickIfVisible('div.insider-opt-in-disallow-button') ||
         await this.clickIfVisible('div.ins-survey-435-close')
       ) {
-        await page.waitForTimeout(2000)
+        await utils.waitForTimeout(2000)
         continue
       }
       break

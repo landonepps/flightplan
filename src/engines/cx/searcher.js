@@ -1,4 +1,5 @@
 const moment = require('moment-timezone')
+const utils = require('../../utils')
 
 const Searcher = require('../../Searcher')
 const { cabins } = require('../../consts')
@@ -25,12 +26,12 @@ module.exports = class extends Searcher {
     // Enter username and password
     await this.enterText('#account-login #username', username)
     await this.enterText('#account-login #password', password)
-    await page.waitForTimeout(250)
+    await utils.waitForTimeout(250)
 
     // Check remember box
     if (!await page.$('#account-login #checkRememberMe:checked')) {
       await page.click('#account-login label[for=checkRememberMe]')
-      await page.waitForTimeout(250)
+      await utils.waitForTimeout(250)
     }
 
     // Submit form
@@ -62,7 +63,7 @@ module.exports = class extends Searcher {
 
     // Set one-way / roundtrip
     await page.click(oneWay ? '#tab-itinerary-type-oneway span' : '#tab-itinerary-type-return span')
-    await page.waitForTimeout(500)
+    await utils.waitForTimeout(500)
 
     // Set dates
     const dates = oneWay ? [departDate] : [departDate, returnDate]
@@ -101,7 +102,7 @@ module.exports = class extends Searcher {
     // Turn off flexible dates
     if (await page.$('#flexible-dates:checked')) {
       await page.click('label[for=flexible-dates]')
-      await page.waitForTimeout(250)
+      await utils.waitForTimeout(250)
     }
 
     // Get results
@@ -291,7 +292,7 @@ module.exports = class extends Searcher {
       // Check the "Don't show again" box and dismiss
       if (await page.$('#change-ticket-type-dont-show-again:not(:checked)')) {
         await page.click('label[for=change-ticket-type-dont-show-again]')
-        await page.waitForTimeout(250)
+        await utils.waitForTimeout(250)
       }
       await page.click('#change-ticket-type-modal button.btn-confirm')
     } catch (err) {}
@@ -307,12 +308,12 @@ module.exports = class extends Searcher {
     const { page } = this
     await page.click(inputSel)
     await this.clear(inputSel)
-    await page.waitForTimeout(500)
+    await utils.waitForTimeout(500)
     await page.keyboard.type(value, { delay: 100 })
     const itemSel = selectSel + ` li[data-airportcode=${value}]`
     await page.waitForSelector(itemSel, { visible: true, timeout: 10000 })
     await page.click(itemSel)
-    await page.waitForTimeout(500)
+    await utils.waitForTimeout(500)
   }
 
   async clearCity (inputSel) {
@@ -320,9 +321,9 @@ module.exports = class extends Searcher {
     try {
       await page.waitForSelector(inputSel, { visible: true })
       await page.click(inputSel)
-      await page.waitForTimeout(500)
+      await utils.waitForTimeout(500)
       await page.keyboard.press('Backspace')
-      await page.waitForTimeout(500)
+      await utils.waitForTimeout(500)
     } catch (err) {}
   }
 
@@ -383,7 +384,7 @@ module.exports = class extends Searcher {
       if (elemDate.isValid() && elemDate.date() === date.date()) {
         // Found the date, click it!
         await elem.click()
-        await page.waitForTimeout(500)
+        await utils.waitForTimeout(500)
         return { month, success: true }
       }
     }
@@ -396,12 +397,12 @@ module.exports = class extends Searcher {
 
     // Check if the desired link is not present
     try {
-      await page.waitForTimeout(1000)
+      await utils.waitForTimeout(1000)
       await page.waitForSelector(selector, { visible: true, timeout: 5000 })
     } catch (err) {
       throw new Searcher.Error(`Failed to navigate calendar to date: ${date}`)
     }
     await page.click(selector)
-    await page.waitForTimeout(500)
+    await utils.waitForTimeout(500)
   }
 }

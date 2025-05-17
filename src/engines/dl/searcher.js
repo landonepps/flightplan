@@ -1,4 +1,5 @@
 const Searcher = require("../../Searcher");
+const utils = require("../../utils");
 
 const { errors } = Searcher;
 
@@ -7,7 +8,7 @@ module.exports = class extends Searcher {
     // Sometimes the page keeps reloading out from under us
     return this.retry(async () => {
       try {
-        await page.waitForTimeout(1000);
+        await utils.waitForTimeout(1000);
         await page.waitForSelector(".logged-in-container", { timeout: 5000 });
       } catch (err) {}
       return !!(await page.$(".logged-in-container"));
@@ -24,15 +25,15 @@ module.exports = class extends Searcher {
 
     // Enter username and password
     await page.waitForSelector(".loginContentBody", { timeout: 5000 });
-    await page.waitForTimeout(2500);
+    await utils.waitForTimeout(2500);
     await this.enterText("#userId", username);
     await this.enterText("#password", password);
-    await page.waitForTimeout(2500);
+    await utils.waitForTimeout(2500);
 
     // Check remember box, and submit the form
     // if (!(await page.$("#rememberMe:checked"))) {
     //   await page.click("#persistentLogin_CheckBox");
-    //   await page.waitForTimeout(250);
+    //   await utils.waitForTimeout(250);
     // }
     await this.clickAndWait(".loginButton");
   }
@@ -86,7 +87,7 @@ module.exports = class extends Searcher {
     //   $("form")[0].submit();
     // });
     // console.log("DT form evaluate is done ");
-    // await page.waitForTimeout(3000);
+    // await utils.waitForTimeout(3000);
 
     // // Wait for results to load
     this.info("Submitting search form");
@@ -158,7 +159,7 @@ module.exports = class extends Searcher {
     // then go here
     // submit button
     page.goto("https://www.delta.com/flight-search-2/book-a-flight");
-    await page.waitForTimeout(3000);
+    await utils.waitForTimeout(3000);
 
     // Uncheck flexible dates since we want to see specific dates
     console.log("Unchecking things");
@@ -167,7 +168,7 @@ module.exports = class extends Searcher {
       $("#chkFlexDate").attr("disabled", false);
       $("#chkFlexDate").click();
     });
-    await page.waitForTimeout(3000);
+    await utils.waitForTimeout(3000);
 
     await page.click("#btnSubmit");
     await this.settle();

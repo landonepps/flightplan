@@ -28,7 +28,7 @@ module.exports = class extends Searcher {
 
     // Login using SKYPASS #
     await page.click('#login-skypass')
-    await page.waitForTimeout(500)
+    await utils.waitForTimeout(500)
 
     // Enter username and password
     await page.waitForSelector('#usernameInput', { visible: true })
@@ -41,7 +41,7 @@ module.exports = class extends Searcher {
       page.waitForSelector('#invalidLogin', { visible: true }).catch(e => {}),
       page.waitForSelector('#login-skypass', { hidden: true }).catch(e => {})
     ])
-    await page.waitForTimeout(500)
+    await utils.waitForTimeout(500)
 
     // Check for errors
     const msgError = await this.textContent('#invalidLogin')
@@ -181,11 +181,11 @@ module.exports = class extends Searcher {
     await page.click(selector)
     await this.clear(selector)
     await page.keyboard.type(value, { delay: 10 })
-    await page.waitForTimeout(1000)
+    await utils.waitForTimeout(1000)
     await page.keyboard.press('ArrowDown')
-    await page.waitForTimeout(500)
+    await utils.waitForTimeout(500)
     await page.keyboard.press('Enter')
-    await page.waitForTimeout(1000)
+    await utils.waitForTimeout(1000)
   }
 
   async chooseDateTab (selector, oldDate, newDate) {
@@ -254,10 +254,10 @@ module.exports = class extends Searcher {
         // Check the box to not show again, then dismiss the popup
         if (await page.$(dontShowAgainSel)) {
           await page.click(dontShowAgainSel)
-          await page.waitForTimeout(500)
+          await utils.waitForTimeout(500)
         }
         await page.click(confirmSel)
-        await page.waitForTimeout(1000)
+        await utils.waitForTimeout(1000)
       }
     } catch (err) {
       // Spurious context errors arise here sometimes, just try again...

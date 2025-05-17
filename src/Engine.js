@@ -321,7 +321,7 @@ class Engine {
       const duration = utils.durationRange(delayBetweenRequests)
       const delay = lastRequest.add(duration).diff(utils.now(), 'ms')
       if (delay > 0) {
-        await page.waitForTimeout(delay)
+        await utils.waitForTimeout(delay)
       }
     }
     lastRequest = utils.now()
@@ -331,7 +331,7 @@ class Engine {
       const restMillis = checkpoint.until.diff(utils.now(), 'ms')
       if (restMillis > 0) {
         this.info(`Cool-down period, resuming in ${humanize(restMillis)}`)
-        await page.waitForTimeout(restMillis)
+        await utils.waitForTimeout(restMillis)
       }
       checkpoint = null
     }
