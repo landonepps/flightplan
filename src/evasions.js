@@ -93,23 +93,13 @@ module.exports = async function (page, options) {
     }, mapping)
   }
 
-  // Pass the User-Agent test
-  const osVersions = [
-    '10_12_0', '10_12_1', '10_12_2', '10_12_3', '10_12_4', '10_12_5', '10_12_6',
-    '10_13_0', '10_13_1', '10_13_2', '10_13_3', '10_13_4', '10_13_5', '10_13_6',
-    '10_14_0', '10_14_1'
-  ]
   const browserVersions = [
-    '52.0.2743.116', '53.0.2785.89', '54.0.2840.71', '55.0.2703.95 ', '56.0.2924.87', '57.0.2987.133', '58.0.3029.110', '59.0.3077.58',
-    '60.0.3112.78', '61.0.3163.100', '62.0.3198.0', '63.0.3239.132', '64.0.3282.119', '65.0.3325.146', '67.0.3396.99', '68.0.3440.106', '69.0.3497.100',
-    '70.0.3538.77', '71.0.3578.98 '
+    '130.0.6900.0', '131.0.6950.0', '132.0.7000.0', '133.0.7050.0', '134.0.7100.0', '135.0.7150.0',
+    '136.0.7200.0', '137.0.7250.0', '138.0.7300.0', '139.0.7350.0', '140.0.7400.0'
   ]
-  const osVersion = osVersions[Math.floor(Math.random() * osVersions.length)]
   const browserVersion = browserVersions[Math.floor(Math.random() * browserVersions.length)]
-  // const userAgent =
-  //   `Mozilla/5.0 (Macintosh; Intel Mac OS X ${osVersion}) ` +
-  //   `AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${browserVersion} Safari/537.36`
-  const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36'
+  // const userAgent = `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${browserVersion} Safari/537.36`
+  const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36'
   await page.setUserAgent(userAgent)
 
   // Pass the Webdriver test

@@ -145,7 +145,7 @@ function search (id) {
       // Initialize the engine
       const credentials = engine.loginRequired
         ? accounts.getCredentials(engine.id) : null
-      await engine.initialize({ credentials, headless: true, verbose: false, throttle: false })
+      await engine.initialize({ credentials, headless: false, verbose: false, throttle: false })
 
       // // Get a start date nearly a year out, on a Wednesday
       // let date = moment().add(46, 'weeks')

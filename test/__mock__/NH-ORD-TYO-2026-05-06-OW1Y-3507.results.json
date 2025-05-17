@@ -1,0 +1,535 @@
+{
+  "engine": "NH",
+  "query": {
+    "partners": false,
+    "cabin": "economy",
+    "quantity": 1,
+    "fromCity": "ORD",
+    "toCity": "TYO",
+    "departDate": "2026-05-06",
+    "returnDate": null
+  },
+  "html": [
+    {
+      "name": "outbound",
+      "path": "./test/__mock__/NH-ORD-TYO-2026-05-06-OW1Y-3507.html"
+    }
+  ],
+  "json": [
+    {
+      "name": "airports",
+      "path": "./test/__mock__/NH-ORD-TYO-2026-05-06-OW1Y-3507.json"
+    }
+  ],
+  "screenshot": [
+    {
+      "name": "outbound",
+      "path": "./test/__mock__/NH-ORD-TYO-2026-05-06-OW1Y-3507.jpg"
+    }
+  ],
+  "flights": [
+    {
+      "awards": [
+        {
+          "engine": "NH",
+          "partner": false,
+          "cabins": ["economy"],
+          "fare": "YS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        },
+        {
+          "engine": "NH",
+          "partner": false,
+          "cabins": ["premium"],
+          "fare": "WS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        },
+        {
+          "engine": "NH",
+          "partner": false,
+          "cabins": ["business"],
+          "fare": "CS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": true,
+          "mileageCost": null,
+          "fees": null
+        },
+        {
+          "engine": "NH",
+          "partner": false,
+          "cabins": ["first"],
+          "fare": "FS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": true,
+          "mileageCost": null,
+          "fees": null
+        }
+      ],
+      "segments": [
+        {
+          "flight": "NH111",
+          "airline": "NH",
+          "aircraft": "77W",
+          "fromCity": "ORD",
+          "toCity": "HND",
+          "date": "2026-05-06",
+          "departure": "17:45",
+          "arrival": "21:15",
+          "stops": 0,
+          "lagDays": 1
+        }
+      ]
+    },
+    {
+      "awards": [
+        {
+          "engine": "NH",
+          "partner": false,
+          "cabins": ["economy"],
+          "fare": "YS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        },
+        {
+          "engine": "NH",
+          "partner": false,
+          "cabins": ["premium"],
+          "fare": "WS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        },
+        {
+          "engine": "NH",
+          "partner": false,
+          "cabins": ["business"],
+          "fare": "CS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": true,
+          "mileageCost": null,
+          "fees": null
+        },
+        {
+          "engine": "NH",
+          "partner": false,
+          "cabins": ["first"],
+          "fare": "FS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": true,
+          "mileageCost": null,
+          "fees": null
+        }
+      ],
+      "segments": [
+        {
+          "flight": "NH011",
+          "airline": "NH",
+          "aircraft": "77W",
+          "fromCity": "ORD",
+          "toCity": "NRT",
+          "date": "2026-05-06",
+          "departure": "11:50",
+          "arrival": "15:00",
+          "stops": 0,
+          "lagDays": 1
+        }
+      ]
+    },
+    {
+      "awards": [
+        {
+          "engine": "NH",
+          "partner": true,
+          "cabins": ["economy", "economy", "economy"],
+          "fare": "YS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        }
+      ],
+      "segments": [
+        {
+          "flight": "BR055",
+          "airline": "BR",
+          "aircraft": "77W",
+          "fromCity": "ORD",
+          "toCity": "TPE",
+          "date": "2026-05-06",
+          "departure": "00:30",
+          "arrival": "05:00",
+          "stops": 0,
+          "lagDays": 1
+        },
+        {
+          "flight": "BR106",
+          "airline": "BR",
+          "aircraft": "789",
+          "fromCity": "TPE",
+          "toCity": "FUK",
+          "date": "2026-05-07",
+          "departure": "08:10",
+          "arrival": "11:20",
+          "stops": 0,
+          "lagDays": 0
+        },
+        {
+          "flight": "NH254",
+          "airline": "NH",
+          "aircraft": "772",
+          "fromCity": "FUK",
+          "toCity": "HND",
+          "date": "2026-05-07",
+          "departure": "13:15",
+          "arrival": "14:55",
+          "stops": 0,
+          "lagDays": 0
+        }
+      ]
+    },
+    {
+      "awards": [
+        {
+          "engine": "NH",
+          "partner": true,
+          "cabins": ["economy", "economy", "economy"],
+          "fare": "YS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        },
+        {
+          "engine": "NH",
+          "partner": true,
+          "cabins": ["business", "business", "business"],
+          "fare": "CS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        }
+      ],
+      "segments": [
+        {
+          "flight": "BR055",
+          "airline": "BR",
+          "aircraft": "77W",
+          "fromCity": "ORD",
+          "toCity": "TPE",
+          "date": "2026-05-06",
+          "departure": "00:30",
+          "arrival": "05:00",
+          "stops": 0,
+          "lagDays": 1
+        },
+        {
+          "flight": "BR178",
+          "airline": "BR",
+          "aircraft": "781",
+          "fromCity": "TPE",
+          "toCity": "KIX",
+          "date": "2026-05-07",
+          "departure": "06:30",
+          "arrival": "10:10",
+          "stops": 0,
+          "lagDays": 0
+        },
+        {
+          "flight": "NH028",
+          "airline": "NH",
+          "aircraft": "767",
+          "fromCity": "ITM",
+          "toCity": "HND",
+          "date": "2026-05-07",
+          "departure": "14:00",
+          "arrival": "15:15",
+          "stops": 0,
+          "lagDays": 0
+        }
+      ]
+    },
+    {
+      "awards": [
+        {
+          "engine": "NH",
+          "partner": true,
+          "cabins": ["economy", "economy", "economy"],
+          "fare": "YS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        },
+        {
+          "engine": "NH",
+          "partner": true,
+          "cabins": ["business", "business", "business"],
+          "fare": "CS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        }
+      ],
+      "segments": [
+        {
+          "flight": "BR055",
+          "airline": "BR",
+          "aircraft": "77W",
+          "fromCity": "ORD",
+          "toCity": "TPE",
+          "date": "2026-05-06",
+          "departure": "00:30",
+          "arrival": "05:00",
+          "stops": 0,
+          "lagDays": 1
+        },
+        {
+          "flight": "BR178",
+          "airline": "BR",
+          "aircraft": "781",
+          "fromCity": "TPE",
+          "toCity": "KIX",
+          "date": "2026-05-07",
+          "departure": "06:30",
+          "arrival": "10:10",
+          "stops": 0,
+          "lagDays": 0
+        },
+        {
+          "flight": "NH2178",
+          "airline": "NH",
+          "aircraft": "738",
+          "fromCity": "ITM",
+          "toCity": "NRT",
+          "date": "2026-05-07",
+          "departure": "14:05",
+          "arrival": "15:30",
+          "stops": 0,
+          "lagDays": 0
+        }
+      ]
+    },
+    {
+      "awards": [
+        {
+          "engine": "NH",
+          "partner": true,
+          "cabins": ["economy", "economy", "economy"],
+          "fare": "YS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        },
+        {
+          "engine": "NH",
+          "partner": true,
+          "cabins": ["business", "business", "business"],
+          "fare": "CS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        }
+      ],
+      "segments": [
+        {
+          "flight": "BR055",
+          "airline": "BR",
+          "aircraft": "77W",
+          "fromCity": "ORD",
+          "toCity": "TPE",
+          "date": "2026-05-06",
+          "departure": "00:30",
+          "arrival": "05:00",
+          "stops": 0,
+          "lagDays": 1
+        },
+        {
+          "flight": "BR178",
+          "airline": "BR",
+          "aircraft": "781",
+          "fromCity": "TPE",
+          "toCity": "KIX",
+          "date": "2026-05-07",
+          "departure": "06:30",
+          "arrival": "10:10",
+          "stops": 0,
+          "lagDays": 0
+        },
+        {
+          "flight": "NH3824",
+          "airline": "NH",
+          "aircraft": "320",
+          "fromCity": "KIX",
+          "toCity": "HND",
+          "date": "2026-05-07",
+          "departure": "14:15",
+          "arrival": "15:40",
+          "stops": 0,
+          "lagDays": 0
+        }
+      ]
+    },
+    {
+      "awards": [
+        {
+          "engine": "NH",
+          "partner": true,
+          "cabins": ["economy", "economy"],
+          "fare": "YS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        },
+        {
+          "engine": "NH",
+          "partner": true,
+          "cabins": ["business", "business"],
+          "fare": "CS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        }
+      ],
+      "segments": [
+        {
+          "flight": "BR055",
+          "airline": "BR",
+          "aircraft": "77W",
+          "fromCity": "ORD",
+          "toCity": "TPE",
+          "date": "2026-05-06",
+          "departure": "00:30",
+          "arrival": "05:00",
+          "stops": 0,
+          "lagDays": 1
+        },
+        {
+          "flight": "BR184",
+          "airline": "BR",
+          "aircraft": "781",
+          "fromCity": "TPE",
+          "toCity": "NRT",
+          "date": "2026-05-07",
+          "departure": "07:55",
+          "arrival": "12:25",
+          "stops": 0,
+          "lagDays": 0
+        }
+      ]
+    },
+    {
+      "awards": [
+        {
+          "engine": "NH",
+          "partner": true,
+          "cabins": ["business", "business"],
+          "fare": "CS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        }
+      ],
+      "segments": [
+        {
+          "flight": "BR055",
+          "airline": "BR",
+          "aircraft": "77W",
+          "fromCity": "ORD",
+          "toCity": "TPE",
+          "date": "2026-05-06",
+          "departure": "00:30",
+          "arrival": "05:00",
+          "stops": 0,
+          "lagDays": 1
+        },
+        {
+          "flight": "BR196",
+          "airline": "BR",
+          "aircraft": "781",
+          "fromCity": "TPE",
+          "toCity": "NRT",
+          "date": "2026-05-07",
+          "departure": "15:20",
+          "arrival": "19:40",
+          "stops": 0,
+          "lagDays": 0
+        }
+      ]
+    },
+    {
+      "awards": [
+        {
+          "engine": "NH",
+          "partner": true,
+          "cabins": ["business", "business"],
+          "fare": "CS",
+          "quantity": 1,
+          "exact": false,
+          "waitlisted": false,
+          "mileageCost": null,
+          "fees": null
+        }
+      ],
+      "segments": [
+        {
+          "flight": "BR055",
+          "airline": "BR",
+          "aircraft": "77W",
+          "fromCity": "ORD",
+          "toCity": "TPE",
+          "date": "2026-05-06",
+          "departure": "00:30",
+          "arrival": "05:00",
+          "stops": 0,
+          "lagDays": 1
+        },
+        {
+          "flight": "BR190",
+          "airline": "BR",
+          "aircraft": "781",
+          "fromCity": "TSA",
+          "toCity": "HND",
+          "date": "2026-05-07",
+          "departure": "16:20",
+          "arrival": "20:05",
+          "stops": 0,
+          "lagDays": 0
+        }
+      ]
+    }
+  ]
+}
